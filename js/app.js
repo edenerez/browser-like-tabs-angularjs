@@ -1,11 +1,11 @@
 (function(){
 	angular.module('tabDemo',[])
 
-	.controller('tabCtrl',['$scope',function($scope){
+	.controller('tabCtrl', ['$scope', '$compile', '$element', function ($scope, $compile, $element) {
 		/** holds tabs, we will perform repeat on this **/
 		$scope.tabs = [{
 			id:1,
-			content:'This is a default tab on load'
+			content:'<button>test</button>'
 		}]
 		
 		$scope.counter = 1;
@@ -14,6 +14,8 @@
 			$scope.counter++;
 			$scope.tabs.push({id:$scope.counter,content:'Any Content'});
 			$scope.selectedTab = $scope.tabs.length - 1; //set the newly added tab active. 
+			$element.append("<button>test</button>");
+			$compile($element.contents())($scope);
 		}
 		
 		/** Function to delete a tab **/
@@ -28,4 +30,5 @@
 			$scope.selectedTab = index;
 		}
 	}])
+    
 })()
